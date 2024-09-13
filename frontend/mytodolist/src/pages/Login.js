@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate  } from 'react-router-dom';
 import './Login.css'; // Import the CSS file
+import axios from 'axios';
+
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [successfully,setSuccessfully]= useState('')
+    const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
-        // Add your form submission logic here (e.g., API call)
+       try {
+        await axios.post('http://localhost:5000/login',{email,password})
+        setSuccessfully('use logged in successfully')
+        navigate('/')
+       } catch (error) {
+        setSuccessfully(error.response.data.message);
+       }
     };
 
     return (
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
                 <h2>Login</h2>
+                <p>{successfully}</p>
                 <div className="inputGroup">
                     <label>Email</label>
                     <input 
