@@ -1,111 +1,81 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-
+/* Container for the whole task form */
 .task-container {
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #6c757d;
-}
-
-.task-container-upper {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  }
+  
+  form{
+    width: 100%;
+  }
+  .task-container-upper {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     width: 100%;
     height: 60%;
-    flex-direction: column;
-}
-
-.inputGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .inputs {
+    margin-bottom: 1rem;
     display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-}
-
-label {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #333;
+    flex-direction: row;
+  }
+  
+  .inputs label {
     width: 50%;
-}
+  }
 
-.input {
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-size: 1rem;
-    width: 50%;
-    border: 2px solid black;
-    border-radius: 15px;
-    outline: none;
-   
-} 
-.input::placeholder{
-    font-style: italic;
-}
-
-.task-container-middle {
-    padding: 2px;
-    height: 20%;
-    width: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-}
-
-.button-add {
+  }
+  
+  .button-add {
+    background-color: #4caf50;
     color: white;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    background-color: #007bff;
-    height: 100%;
-    width: 60%;
-}
+    font-size: 1rem;
+  }
+  
+  .button-add:hover {
+    background-color: #45a049;
+  }
 
+  .task-container-middle {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+  }
+  
 
-.task-container-lower {
+  .task-container-lower {
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    height: 20%;
     width: 100%;
-    padding: 1px;
-    gap: 2px;
-}
-
-.button2 {
-    background-color: #007bff;
-    color: white;
-    font-size: 0.9rem;
+  }
+  
+  .button2 {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    width: 50%;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .task-container {
-        padding: 15px;
-    }
-
-    .input {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-
-    .button-add, .button2 {
-        padding: 10px 18px;
-        font-size: 0.9rem;
-    }
-}
+    font-size: 1rem;
+  }
+  
+  .button2:hover {
+    background-color: #e0e0e0;
+  }
+  

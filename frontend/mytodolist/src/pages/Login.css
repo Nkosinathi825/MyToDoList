@@ -1,79 +1,105 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-}
 
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #f5f5f5; /* Light background for contrast */
 }
 
+/* Form Styling */
 .login-form {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    max-width: 100%;
+    width: 40%;
+    height: 50%;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center-align text */
 }
 
+/* Heading */
 .login-form h2 {
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
     color: #333;
+    font-weight: bold;
 }
 
+/* Input Group */
 .inputGroup {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
+    text-align: left;
 }
 
 .inputGroup label {
     display: block;
-    margin-bottom: 5px;
-    color: #333;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 600;
 }
 
-.input {
+.inputGroup input {
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
+.inputGroup input:focus {
+    border-color: #6c63ff; /* Change color when focused */
+}
+
+/* Submit Button */
 .button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
+    background-color: #6c63ff; /* Primary color */
+    color: white;
     border: none;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
+    border-radius: 5px;
+    padding: 0.75rem;
+    width: 100%;
+    font-size: 1.2rem;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #5750d7; /* Darker shade on hover */
 }
 
+/* Success/Failure Message */
+p {
+    color: green;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Error/Failure Message (if needed) */
+.error {
+    color: red;
+}
+
+/* Separator */
 hr {
-    margin: 20px 0;
+    margin: 1.5rem 0;
     border: none;
     border-top: 1px solid #ddd;
 }
 
+/* Register Link */
 h4 {
-    text-align: center;
+    font-size: 1rem;
     color: #333;
 }
 
 h4 a {
-    color: #007bff;
+    color: #6c63ff;
     text-decoration: none;
+    font-weight: bold;
 }
 
 h4 a:hover {

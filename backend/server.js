@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bcrypt from 'bcryptjs'; // Import bcrypt
 import User from './models/User.model.js';
+import Todo  from './models/Todo.model.js';
 
 dotenv.config();
 
@@ -77,4 +78,13 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-
+app.post('/todo',async (req,res)=>{
+    const {title,description,completed }= req.body
+    try {
+        const   NewTask= new Todo({title:title,description:description})
+        await NewTask.save()
+        res.status(201).json({message:"Todo added successfully"})
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+})
