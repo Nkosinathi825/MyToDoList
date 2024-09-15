@@ -1,21 +1,32 @@
-import React, { useContext } from 'react'; // Import useContext
+import React, { useContext, useState } from 'react'; 
 import AddTask from '../component/AddTask';
 import './Dashboard.css';
 import { UserContext } from '../context/UserContext';
+import DisplayTodo from '../component/DisplayTodo';
 
 export default function Dashboard() {
-  // Use the useContext hook to access the user context
-  const { user, login } = useContext(UserContext);
-  console.log(user.name,user._id)
+  const { user } = useContext(UserContext);
+  const [clicked, setClicked] = useState('T');
+
+  const handleClicked = (value) => {
+    setClicked(value);
+  };
+
   return (
     <main className="container">
-      <h1>Welcome, {user?.name}</h1>
-      <section className="upper-container">
-        <AddTask />
-      </section>
-      <section className="lower-container">
-        
-      </section>
+      <h1>Welcome, {user ? user.name : "guest"}</h1>
+      {user ? (
+        <>
+          <section className="upper-container">
+            <AddTask clicked={handleClicked} />
+          </section>
+          <section className="lower-container">
+            <DisplayTodo clicked={clicked} />
+          </section>
+        </>
+      ) : (
+        <p>Please log in to manage your tasks.</p>
+      )}
     </main>
   );
 }

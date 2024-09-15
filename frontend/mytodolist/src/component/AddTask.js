@@ -3,31 +3,34 @@ import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import './AddTask.css'; 
 
-export default function AddTask({ id }) {
+export default function AddTask({ clicked }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [ error ,setError]=useState('')
-    const [status,setStatus]=useState('')
-    const { user, logout } = useContext(UserContext); // Use useContext to access the context
+    const [loading, setLoading] = useState(false); // Add loading state
+    const { user } = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
-
-        console.log("Task Submitted:", { title, description });
-        console.log(user._id); 
+        setLoading(true); // Start loading
 
         try {
-            const reponse= await axios.post('http://localhost:5000/login',{title,description})
-            setStatus("Todo added successfully")
-
+            await axios.post('http://localhost:5000/addtodo', {
+                title,
+                description,
+                user_id: user._id
+            });
+            alert("Todo added successfully");
+            setTitle('');
+            setDescription('');
         } catch (error) {
-            setError(error.response?.data?.message)
+            alert(error.response?.data?.message || 'An error occurred');
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
     return (
         <main className="task-container">
-            <alert>{status}</alert>
             <form onSubmit={handleSubmit}>
                 <section className="task-container-upper">
                     <section className="inputs">
@@ -54,12 +57,14 @@ export default function AddTask({ id }) {
                     </section>
                 </section>
                 <section className="task-container-middle">
-                    <button type="submit" className="button-add">Add Task</button>
+                    <button type="submit" className="button-add" disabled={loading}>
+                        {loading ? 'Adding...' : 'Add Task'}
+                    </button>
                 </section>
             </form>
             <section className="task-container-lower">
-                <button className="button2">Todos</button>
-                <button className="button2">Completed</button>
+                <button className="button2" onClick={() => clicked('T')}>Todos</button>
+                <button className="button2" onClick={() => clicked('C')}>Completed</button>
             </section>
         </main>
     );
