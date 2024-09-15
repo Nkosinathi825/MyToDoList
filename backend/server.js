@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:3000', 
-    methods: 'GET,POST,DELETE',
+    methods: 'GET,POST,DELETE,PUT',
     credentials: true
 }));
 
@@ -81,27 +81,30 @@ app.post('/login', async (req, res) => {
 app.post('/addtodo', async (req, res) => {
     const { user_id, title, description, completed } = req.body;
     try {
+   
+        const existingTodos = await Todo.find({ user_id });
+        const order = existingTodos.length;
+
         const newTask = new Todo({
             user_id, 
             title,      
             description,
-            completed: completed !== undefined ? completed : false
+            completed: completed !== undefined ? completed : false,
+            order  
         });
 
-
         await newTask.save();
-
         res.status(201).json({ message: 'Todo added successfully', todo: newTask });
     } catch (error) {
-
         console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
 });
+
 app.get('/gettodo', async (req, res) => {
     const user_id = req.query.user_id; 
     try {
-        const todos = await Todo.find({ user_id });
+        const todos = await Todo.find({ user_id }).sort({ order: 1 }); 
         if (!todos.length) {
             return res.status(404).json({ message: 'No todos found' });
         }
@@ -110,6 +113,7 @@ app.get('/gettodo', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
 app.delete('/deletetodo/:todo_id', async (req, res) => {
     const { todo_id } = req.params;
     const { user_id } = req.query; 
@@ -122,3 +126,33 @@ app.delete('/deletetodo/:todo_id', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+app.put('/completetodo/:todo_id', async (req, res) => {
+    const { todo_id } = req.params;
+    const { user_id, completed } = req.body; 
+
+    try {
+        const todo = await Todo.findOne({ _id: todo_id, user_id });
+
+
+        todo.completed = completed;
+        await todo.save();
+
+        res.status(200).json({ message: 'Todo updated successfully', todo });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+app.put('/updateorder', async (req, res) => {
+    const { user_id, todos } = req.body;  
+
+    try {
+        const updatePromises = todos.map(todo =>
+            Todo.updateOne({ _id: todo._id, user_id }, { order: todo.order })
+        );
+        await Promise.all(updatePromises);
+        res.status(200).json({ message: 'Todo order updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+

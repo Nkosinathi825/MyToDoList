@@ -19,7 +19,6 @@ export default function AddTask({ clicked }) {
                 description,
                 user_id: user._id
             });
-            alert("Todo added successfully");
             setTitle('');
             setDescription('');
         } catch (error) {
@@ -62,10 +61,6 @@ export default function AddTask({ clicked }) {
                     </button>
                 </section>
             </form>
-            <section className="task-container-lower">
-                <button className="button2" onClick={() => clicked('T')}>Todos</button>
-                <button className="button2" onClick={() => clicked('C')}>Completed</button>
-            </section>
         </main>
     );
 }

@@ -51,7 +51,7 @@ function Login() {
                         required 
                     />
                 </div>
-                <button type="submit" className="button1">Login</button>
+                <button type="submit" className="button10">Login</button>
                 <hr />
                 <h4>Don't have an account? <Link to={'/register'}>Register</Link></h4>
             </form>

@@ -109,6 +109,12 @@
     color:black;
     border: 2px solid black;
 }
+.btn5{
+    background-color: rgb(243, 167, 140);
+    color:orangered;
+    border: 2px solid orangered;
+    width: 150px;
+}
 
 /* Button hover and disabled states */
 .button:hover {
@@ -118,4 +124,10 @@
 .button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+.style{
+    font-style: italic;
+}
+.title-style{
+    text-decoration: underline 2px solid   red;
 }

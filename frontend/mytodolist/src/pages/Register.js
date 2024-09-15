@@ -69,7 +69,7 @@ function Register() {
                     />
                 </section>
                 {error && <p className="error">{error}</p>}
-                <button type="submit" className="button" disabled={loading}>
+                <button type="submit" className="button10" disabled={loading}>
                     {loading ? 'Registering...' : 'Register'}
                 </button>
                 <hr />

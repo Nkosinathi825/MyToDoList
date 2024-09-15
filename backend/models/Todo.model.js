@@ -21,6 +21,10 @@ const todoSchema = new mongoose.Schema({
     completedAt: { 
         type: Date,
     },
+    order: { 
+        type: Number, 
+        default: 0 
+    } 
 }, { timestamps: true }); 
 
 // Pre-save hook to set completedAt when the todo is completed
