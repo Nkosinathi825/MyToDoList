@@ -11,12 +11,11 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.options(cors({
-    origin: 'http://localhost:3000',
-    methods: 'GET,POST,PUT,DELETE',
+app.use(cors({
+    origin: 'http://localhost:3000', 
+    methods: 'GET,POST,DELETE',
     credentials: true
 }));
-
 
 const PORT = process.env.PORT || 5000;
 
@@ -119,6 +118,7 @@ app.delete('/deletetodo/:todo_id', async (req, res) => {
         const todos = await Todo.find({ user_id });
         res.status(200).json({ todos });
     } catch (error) {
+
         res.status(500).json({ message: 'Server error' });
     }
 });
